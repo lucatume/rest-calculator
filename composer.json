@@ -1,0 +1,16 @@
+{
+    "name": "lucatume/rest-calculator",
+    "description": "A WordPress REST API based calculator example plugin.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Luca Tumedei",
+            "email": "luca@theaveragedev.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "lucatume/wp-browser": "^1.19"
+    }
+}
