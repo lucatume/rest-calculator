@@ -13,9 +13,17 @@ if ( function_exists( 'add_action' ) ) {
 			'methods'  => 'GET',
 			'callback' => [ new Calculator, 'process' ]
 		] );
+		register_rest_route( 'calc', 'whoami', [
+			'methods'  => 'GET',
+			'callback' => 'restcalculator_whoami'
+		] );
 	} );
 }
 
+function restcalculator_whoami() {
+	echo(wp_get_current_user()->user_login);
+	die();
+}
 class Calculator {
 	function process( WP_REST_Request $req ) {
 		try {

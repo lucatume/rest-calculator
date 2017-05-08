@@ -2269,7 +2269,7 @@ trait AcceptanceTesterActions
 	 *
 	 * The method will presume the browser is in the plugin screen already.
 	 *
-	 * @param  string $pluginSlug The plugin slug, like "hello-dolly".
+	 * @param  string|array $pluginSlug The plugin slug, like "hello-dolly" or a list of plugin slugs.
 	 *
 	 * @return void
      * @see \Codeception\Module\WPBrowser::activatePlugin()
@@ -2286,7 +2286,7 @@ trait AcceptanceTesterActions
 	 *
 	 * The method will presume the browser is in the plugin screen already.
 	 *
-	 * @param  string $pluginSlug The plugin slug, like "hello-dolly".
+	 * @param  string|array $pluginSlug The plugin slug, like "hello-dolly" or a list of plugin slugs.
 	 *
 	 * @return void
      * @see \Codeception\Module\WPBrowser::deactivatePlugin()
