@@ -17,9 +17,11 @@ class NonceVerificationCest {
 	public function it_should_allow_identifying_yourself( FunctionalTester $I ) {
 		$id = $I->haveUserInDatabase( 'luca', [ 'user_pass' => 'luca' ] );
 
+		// we cannot use wp_signon here as it requires a redirection
 		$I->loginAs( 'luca', 'luca' );
-		$_COOKIE[ LOGGED_IN_COOKIE ] = $I->grabCookie( LOGGED_IN_COOKIE );
 
+		// set up the recipes for the nonce
+		$_COOKIE[ LOGGED_IN_COOKIE ] = $I->grabCookie( LOGGED_IN_COOKIE );
 		wp_set_current_user( $id );
 		$restNonce = wp_create_nonce( 'wp_rest' );
 
