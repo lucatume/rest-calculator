@@ -24,7 +24,7 @@ class AddEndpointHandlerTest extends \Codeception\TestCase\WPTestCase {
 		$request->set_param( 'o2', $o2 );
 
 		$module = new \Calculator();
-		$result = $module->process( $request );
+		$result = $module->add( $request );
 
 		$this->assertInstanceOf( \WP_REST_Response::class, $result );
 		$this->assertEquals( $expected, $result->data );
