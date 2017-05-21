@@ -22,11 +22,6 @@ if (function_exists('add_action')) {
 }
 
 class Calculator {
-
-	public function add(WP_REST_Request $req) {
-		return $this->process($req, 'add');
-	}
-
 	protected function process(WP_REST_Request $req, $op = 'add') {
 		try {
 			$operand_1 = new Operand($req->get_param('o1'));
@@ -56,6 +51,10 @@ class Calculator {
 		$response->set_status(200);
 
 		return $response;
+	}
+
+	public function add(WP_REST_Request $req) {
+		return $this->process($req, 'add');
 	}
 
 	public function times(WP_REST_Request $req) {
@@ -88,7 +87,9 @@ class Operand {
 }
 
 class Operation {
+
 	protected $o1;
+
 	protected $o2;
 
 	function __construct(Operand $o1, Operand $o2) {

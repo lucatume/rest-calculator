@@ -11,6 +11,7 @@ modules:
         - Filesystem
         - WPDb
         - WordPress
+        - WPLoader
     config:
         WPDb:
             dsn: 'mysql:host=localhost;dbname=wp'
@@ -19,10 +20,17 @@ modules:
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://wp.dev'
+            url: 'http://wp.localhost'
             tablePrefix: wp_
         WordPress:
             depends: WPDb
             wpRootFolder: /home/luca/Sites/wp
             adminUsername: admin
             adminPassword: admin
+        WPLoader:
+            loadOnly: true
+            wpRootFolder: /home/luca/Sites/wp
+            dbName: wp
+            dbHost: localhost
+            dbUser: root
+            dbPassword: root
