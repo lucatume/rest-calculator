@@ -18,10 +18,20 @@ if (function_exists('add_action')) {
 			'methods' => 'GET',
 			'callback' => [new Calculator, 'times'],
 		]);
+
+		register_rest_route('calc', 'hash/(?P<input>.*)', [
+			'methods' => 'GET',
+			'callback' => [new Calculator, 'hash'],
+		]);
 	});
 }
 
 class Calculator {
+
+	public function add(WP_REST_Request $req) {
+		return $this->process($req, 'add');
+	}
+
 	protected function process(WP_REST_Request $req, $op = 'add') {
 		try {
 			$operand_1 = new Operand($req->get_param('o1'));
@@ -53,10 +63,6 @@ class Calculator {
 		return $response;
 	}
 
-	public function add(WP_REST_Request $req) {
-		return $this->process($req, 'add');
-	}
-
 	public function times(WP_REST_Request $req) {
 		if (get_current_user_id() == 0 || !current_user_can('read')) {
 			$response = new WP_REST_Response('Divisions are for subscribers only');
@@ -66,6 +72,12 @@ class Calculator {
 		}
 
 		return $this->process($req, 'times');
+	}
+
+	public function hash(WP_REST_Request $req) {
+		$value = $req->get_param('input');
+
+		return restCalculator_hash($value);
 	}
 }
 
@@ -132,4 +144,10 @@ class Division extends Operation {
 
 		return $this->o1->get_value() / $this->o2->get_value();
 	}
+}
+
+function restCalculator_hash($value) {
+	$hash = md5(ucwords(str_replace('a', '4', $value)));
+
+	return apply_filters('restCalculator_hash', $hash);
 }
