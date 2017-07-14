@@ -12,7 +12,7 @@ modules:
         - WPQueries
     config:
         WPLoader:
-            wpRootFolder: /home/luca/Sites/wp
+            wpRootFolder: '%WP_ROOT_FOLDER%'
             dbName: %TEST_DB_NAME%
             dbHost: %DB_HOST%
             dbUser: %DB_USER%

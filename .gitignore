@@ -2,4 +2,4 @@
 vendor
 tests/_output
 codeception.yml
-.env.codeception.local
+.env.local

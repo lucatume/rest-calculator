@@ -11,6 +11,7 @@
     ],
     "require": {},
     "require-dev": {
-        "lucatume/wp-browser": "^1.19"
+        "lucatume/wp-browser": "^1.19",
+        "vlucas/phpdotenv": "^2.4"
     }
 }
