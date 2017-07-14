@@ -14,23 +14,23 @@ modules:
         - WPLoader
     config:
         WPDb:
-            dsn: 'mysql:host=localhost;dbname=wp'
-            user: root
-            password: root
+            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+            user: %DB_USER%
+            password: %DB_PASSWORD%
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://wp.localhost'
+            url: '%WP_URL%'
             tablePrefix: wp_
         WordPress:
             depends: WPDb
-            wpRootFolder: /home/luca/Sites/wp
+            wpRootFolder: %WP_ROOT_FOLDER%
             adminUsername: admin
             adminPassword: admin
         WPLoader:
             loadOnly: true
-            wpRootFolder: /home/luca/Sites/wp
-            dbName: wp
-            dbHost: localhost
-            dbUser: root
-            dbPassword: root
+            wpRootFolder: %WP_ROOT_FOLDER%
+            dbName: %DB_NAME%
+            dbHost: %DB_HOST%
+            dbUser: %DB_USER%
+            dbPassword: %DB_PASSWORD%

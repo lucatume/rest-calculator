@@ -13,13 +13,13 @@ modules:
     config:
         WPLoader:
             wpRootFolder: /home/luca/Sites/wp
-            dbName: wpTests
-            dbHost: localhost
-            dbUser: root
-            dbPassword: root
+            dbName: %TEST_DB_NAME%
+            dbHost: %DB_HOST%
+            dbUser: %DB_USER%
+            dbPassword: %DB_PASSWORD%
             tablePrefix: int_wp_
-            domain: wp.localhost
-            adminEmail: admin@wp.localhost
+            domain: %WP_DOMAIN%
+            adminEmail: admin@%WP_DOMAIN%
             title: WP Tests
             plugins: [rest-calculator/rest-calculator.php]
             activatePlugins: [rest-calculator/rest-calculator.php]

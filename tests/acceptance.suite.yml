@@ -13,19 +13,19 @@ modules:
         - REST
     config:
         WPDb:
-            dsn: 'mysql:host=localhost;dbname=wp'
-            user: root
-            password: root
+            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+            user: %DB_USER%
+            password: %DB_PASSWORD%
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://wp.localhost'
+            url: '%WP_URL%'
             tablePrefix: wp_
         WPBrowser:
-            url: 'http://wp.localhost'
+            url: '%WP_URL%'
             adminUsername: admin
             adminPassword: admin
             adminPath: /wp-admin
         REST:
             depends: WPBrowser
-            url: 'http://wp.localhost/wp-json'
+            url: '%WP_URL%/wp-json'

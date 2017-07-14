@@ -1,0 +1,50 @@
+version: "2"
+
+services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: nginx-proxy
+        ports:
+            - "80:80"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./docker/conf/nginx:/etc/nginx/vhost.d:ro
+    mysql:
+        image: mysql 
+        environment:
+            - VIRTUAL_HOST=db.localhost
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=rc
+            - MYSQL_USER=rc
+            - MYSQL_PASSWORD=rc
+        volumes:
+            - ./docker/database:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        user: "1000"
+    memcached:
+        image: memcached:alpine
+    mailcatcher:
+        image: helder/mailcatcher
+        environment:
+            - VIRTUAL_HOST=mailcatcher.localhost
+    php:
+        environment:
+            - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
+        build: ./docker/build/php
+        links:
+            - memcached
+            - "mysql:db.localhost"
+            - "nginx-proxy:rc.localhost"
+            - "mailcatcher:mail"
+        volumes:
+            - ./docker/www:/var/www/html
+            - .:/var/www/html/wp-content/plugins/rest-calculator
+    nginx:
+        build: ./docker/build/nginx
+        environment:
+            - VIRTUAL_HOST=rc.localhost,*.rc.localhost
+        volumes:
+            - ./docker/www:/var/www/html
+        links:
+            - php
